@@ -17,7 +17,15 @@ public class Patrol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        obj.velocity = new Vector2(movingRight ? -speed : speed * Time.deltaTime, obj.velocity.y);
+            
+            //transform.localScale = new Vector3(0.2f, transform.localScale.y, transform.localScale.z);
+            transform.Translate(new Vector3(distance * Time.deltaTime, 0, 0));
+        //if()
+
+            /*transform.localScale = new Vector3(-0.2f, transform.localScale.y, transform.localScale.z);
+            transform.Translate(new Vector3(-distance * Time.deltaTime, 0, 0));*/
+            
+        /*obj.velocity = new Vector2(movingRight ? -speed : speed * Time.deltaTime, obj.velocity.y);
 
         RaycastHit2D groundInfo = Physics2D.Raycast(groundDetector.position, Vector2.down, distance);
         if (groundInfo.collider == false) {
@@ -29,6 +37,19 @@ public class Patrol : MonoBehaviour
                 transform.eulerAngles = new Vector3(0, 0, 0);
                 movingRight = true;
             }
+        }*/
+    }
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (transform.rotation.y == 0)
+        {
+            transform.eulerAngles = new Vector3(0, -180, 0);
+            transform.Translate(new Vector3(-distance * Time.deltaTime, 0, 0));
+        }
+        else
+        {
+            transform.eulerAngles = new Vector3(0, -0, 0);
+            transform.Translate(new Vector3(-distance * Time.deltaTime, 0, 0));
         }
     }
 }
